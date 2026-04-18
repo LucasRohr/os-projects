@@ -1,3 +1,9 @@
+#ifndef DOMAIN_H // Proteção contra múltiplas inclusões
+#define DOMAIN_H
+
+// Tamanho da página e frame: 8 KB
+#define PAGE_SIZE 8192
+
 // Limite máximo de instruções para array estático de leitura do log
 #define MAX_INSTRUCTIONS 1000
 
@@ -21,3 +27,11 @@ typedef struct {
     int page_number; // Número da página que está armazenada no frame (se ocupado)
     char data[8192]; // 8KB de dados por frame
 } Frame;
+
+// Calcula e retorna o número da página a partir do endereço virtual
+int get_page_number(int virtual_address);
+
+// Calcula e retorna o deslocamento (offset) a partir do endereço virtual
+int get_offset(int virtual_address);
+
+#endif

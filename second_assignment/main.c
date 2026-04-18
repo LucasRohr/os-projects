@@ -45,10 +45,14 @@ int main() {
         printf("\n[NOVA INSTRUCAO] Processo: %d | Endereco Virtual: %d\n", current_pid, current_virtual_address);
         
         // ==========================================================
-        // AQUI ENTRA A LÓGICA DA SUA MMU!
-        // 
-        // 1. Calcular o número da página (end_virtual_atual / 8192)
-        // 2. Calcular o deslocamento/offset (end_virtual_atual % 8192)
+        // Lógica da MMU para cada instrução:
+        
+        // 1. Calcular o número da página
+        int page_number = get_page_number(current_virtual_address);
+
+        // 2. Calcular o deslocamento/offset
+        int offset = get_offset(current_virtual_address);
+
         // 3. Consultar a Tabela de Páginas do 'pid_atual'
         // 4. Tratar Page Fault ou Hit
         // 5. Atualizar o contador de tempo do LRU
