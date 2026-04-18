@@ -1,8 +1,12 @@
 #ifndef DOMAIN_H // Proteção contra múltiplas inclusões
 #define DOMAIN_H
 
+#include <limits.h>
+
 // Tamanho da página e frame: 8 KB
 #define PAGE_SIZE 8192
+#define NUM_PAGES 128  // 1 MB Virtual / 8 KB
+#define NUM_FRAMES 8   // 64 KB Física / 8 KB
 
 // Limite máximo de instruções para array estático de leitura do log
 #define MAX_INSTRUCTIONS 1000
@@ -33,5 +37,11 @@ int get_page_number(int virtual_address);
 
 // Calcula e retorna o deslocamento (offset) a partir do endereço virtual
 int get_offset(int virtual_address);
+
+// Função para encontrar um frame livre na memória física
+int find_free_frame(Frame physical_memory[]);
+
+// Função para implementar o algoritmo LRU e encontrar um frame para substituição
+int find_lru_frame(Frame physical_memory[], PageTableEntry page_table[]);
 
 #endif
